@@ -1,0 +1,26 @@
+{
+  "name": "Beats-Music",
+  "version": "0.0.1",
+  "dependencies": {
+    "superagent": "~0.16.0",
+    "express": "~3.4.8"
+  },
+  "devDependencies": {
+    "grunt-cli": "~0.1.9",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-sass": "~0.11.0",
+    "grunt-node-webkit-builder": "~0.1.17",
+    "grunt-contrib-copy": "~0.5.0"
+  },
+  "main": "index.html",
+  "window": {
+    "title": "Beats Music",
+    "show": true,
+    "toolbar": true,
+    "frame": true,
+    "position": "center",
+    "width": 400,
+    "height": 460,
+    "resizable": false
+  }
+}

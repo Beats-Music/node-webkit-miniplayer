@@ -1,0 +1,106 @@
+@font-face {
+    font-family: 'beats-desktop';
+    src:url('assets/fonts/beats-desktop/fonts/beats-desktop.eot?z3dvvo');
+    src:url('assets/fonts/beats-desktop/fonts/beats-desktop.eot?#iefixz3dvvo') format('embedded-opentype'),
+        url('assets/fonts/beats-desktop/fonts/beats-desktop.woff?z3dvvo') format('woff'),
+        url('assets/fonts/beats-desktop/fonts/beats-desktop.ttf?z3dvvo') format('truetype'),
+        url('assets/fonts/beats-desktop/fonts/beats-desktop.svg?z3dvvo#beats-desktop') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'beats-desktop';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-play:before {
+    content: "\e600";
+}
+.icon-pause:before {
+    content: "\e601";
+}
+.icon-stop:before {
+    content: "\e602";
+}
+.icon-search:before {
+    content: "\e603";
+}
+.icon-backward:before {
+    content: "\e604";
+}
+.icon-forward:before {
+    content: "\e605";
+}
+.icon-play2:before {
+    content: "\e606";
+}
+.icon-pause2:before {
+    content: "\e607";
+}
+.icon-stop2:before {
+    content: "\e608";
+}
+.icon-backward2:before {
+    content: "\e609";
+}
+.icon-forward2:before {
+    content: "\e60a";
+}
+.icon-first:before {
+    content: "\e60b";
+}
+.icon-last:before {
+    content: "\e60c";
+}
+.icon-previous:before {
+    content: "\e60d";
+}
+.icon-next:before {
+    content: "\e60e";
+}
+.icon-loop:before {
+    content: "\e60f";
+}
+.icon-loop2:before {
+    content: "\e610";
+}
+.icon-loop3:before {
+    content: "\e611";
+}
+.icon-volume-decrease:before {
+    content: "\e612";
+}
+.icon-volume-increase:before {
+    content: "\e613";
+}
+.icon-volume-mute:before {
+    content: "\e614";
+}
+.icon-shuffle:before {
+    content: "\e615";
+}
+.icon-eject:before {
+    content: "\e616";
+}
+.icon-volume-high:before {
+    content: "\e617";
+}
+.icon-volume-medium:before {
+    content: "\e618";
+}
+.icon-volume-low:before {
+    content: "\e619";
+}
+.icon-volume-mute2:before {
+    content: "\e61a";
+}

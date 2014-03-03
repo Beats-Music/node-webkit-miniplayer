@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Beats Music</title>
+    <link href="app.css" rel="stylesheet" />
+  </head>
+  <body style="-webkit-app-region: drag">
+
+      <div class="app">
+          <div class="login">
+              <img class="login--logo" src="assets/beatsmusic-vert-color.png" />
+              <button class="login--button">Log In</button>
+          </div>
+      </div>
+
+      <script id="artwork-template" type="text/x-handlebars-template">
+        <div class="artwork">
+            <img src={{ getBeatsImage type id "large" }} />
+            <div class="app--menu--icon--container">
+                <div class="menu--icons">
+                    <div class="icon--bar"></div>
+                    <div class="icon--bar"></div>
+                    <div class="icon--bar"></div>
+                </div>
+            </div>
+        </div>
+      </script>
+
+      <script id="music-active-template" type="text/x-handlebars-template">
+        <div class="music--active">
+              <div class="music--title">{{ meta.title }}</div>
+              <ul class="music--meta">
+                  <li class="meta--year"> {{ meta.year }} </li>
+                  {{#if meta.numTracks}}
+                    <li class="meta--numTracks"> {{ meta.numTracks }} Songs </li>
+                  {{/if}}
+                  <li class="meta--duration"> {{ meta.duration }} </li>
+                  {{#if meta.subscribers}}
+                    <li class="meta--subscribers"> {{ meta.subscribers }} Subscribers </li>
+                  {{/if}}
+              </ul>
+              <div class="music--owner">
+                  <img class="owner--picture" src={{ getBeatsImage meta.image meta.id "small" }} />
+                  <h5 class="owner--details"> <span class="details--type"> {{ capitalize meta.type}} by</span> {{meta.owner}}</h5>
+              </div>
+        </div>
+      </script>
+
+      <script id="player-template" type="text/x-handlebars-template">
+        <div class="player">
+            <div class="player--scrubber"></div>
+            <div class="player--info">
+              <div class="info--title">{{ title }}</div>
+              <div class="info--artist">{{ artist }}</div>
+            </div>
+
+            <div class="player--action">
+              <div class="action--menu">
+                  <div class="menu--icon"></div>
+                  <div class="menu--icon"></div>
+                  <div class="menu--icon"></div>
+              </div>
+            </div>
+
+            <div class="player--actions">
+              <div class="icon-previous"></div>
+              <div class="icon-pause"></div>
+              <div class="icon-next"></div>
+            </div>
+        </div>
+      </script>
+
+      <script id="search-template" type="text/x-handlebars-template">
+        <div class="search">
+            <div class="icon-search"></div>
+            <form>
+                <input id="search-music" type="text" name="search" placeholder="Search Music">
+            </form>
+            <div class="icon-play"></div>
+        </div>
+        <div class="search-results--wrapper"></div>
+      </script>
+
+      <script id="search-result-template" type="text/x-handlebars-template">
+        <div class="search--results">
+            <h2 class="results--header"> Playlists </h2>
+            <ul class="results">
+              {{#each playlists}}
+                <li data-type="playlist" data-id="{{id}}">
+                    <div class="results--art">
+                        <img src={{ getBeatsImage "playlist" id "small" }} />
+                    </div>
+                    <div class="results--meta">
+                        <h4 class="meta--title">{{display}}</h4>
+                        <h5 class="meta--name">{{detail}}</h5>
+                    </div>
+                </li>
+              {{/each}}
+            </ul>
+            <h2 class="results--header"> Albums </h2>
+            <ul class="results">
+              {{#each albums}}
+                <li data-type="album" data-id="{{id}}">
+                    <div class="results--art">
+                        <img src={{ getBeatsImage "album" id "small" }} />
+                    </div>
+                    <div class="results--meta">
+                        <h4 class="meta--title">{{display}}</h4>
+                        <h5 class="meta--name">{{detail}}</h5>
+                    </div>
+                </li>
+              {{/each}}
+            </ul>
+            <h2 class="results--header"> Tracks </h2>
+            <ul class="results">
+              {{#each tracks}}
+                <li data-type="track" data-id="{{id}}">
+                    <div class="results--art">
+                        <img src={{ getBeatsImage "track" id "small" }} />
+                    </div>
+                    <div class="results--meta">
+                        <h4 class="meta--title">{{display}}</h4>
+                        <h5 class="meta--name">{{detail}}</h5>
+                    </div>
+                </li>
+              {{/each}}
+            </ul>
+        </div>
+      </script>
+
+      <script id="tracklist-template" type="text/x-handlebars-template">
+        <div class="tracklist">
+          <ul>
+              {{#each tracks}}
+                <li>
+                    <div class="track-number">
+                        <span class="number">{{trackNum @index}}</span>
+                    </div>
+                    <div class="track-meta">
+                        <h4 class="track-title">{{display}}</h4>
+                        <!--<h5 class="track-artist"></h5>-->
+                    </div>
+                </li>
+              {{/each}}
+          </ul>
+        </div>
+      </script>
+
+
+    <script>
+      // Node dependencies
+      var config = require('./config');
+      var gui = require('nw.gui');
+      var express = require('express');
+      var request = require('superagent');
+
+      //Setup apps global namespace and main launch window 
+      window.clientApp = {};
+      window.clientApp.mainWin = gui.Window.get();
+    </script>
+
+    <script src="components/handlebars/handlebars.min.js"></script>
+    <script src="components/jquery/dist/jquery.min.js"></script>
+
+    <script src="templates/helpers.js"></script>
+    <script src="scripts/templates.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/api.js"></script>
+    <script src="scripts/search.js"></script>
+    <script src="scripts/player.js"></script>
+    <script src="scripts/appInit.js"></script>
+
+    <script type="text/javascript">
+      // window.clientApp.init();
+    </script>
+
+    <script src="app.js"></script>
+
+  </body>
+</html>
