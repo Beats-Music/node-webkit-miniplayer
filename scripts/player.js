@@ -185,21 +185,12 @@ window.clientApp.player = {
         window.clientApp.api.track(ID, cb);
     },
     getAudio: function(){
-        
-    },
-    play: function(){
-
-    },
-    pause: function(){
 
     },
     next: function(){
 
     },
     previous: function(){
-
-    },
-    stop: function(){
 
     },
     getTracklist: function(){

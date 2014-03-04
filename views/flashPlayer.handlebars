@@ -1,5 +1,8 @@
 <div class="player">
-    <div class="player--scrubber"></div>
+    <div class="player--scrubber">
+      <div class="scrubber--icon"></div>
+      <div class="scrubber--mask"></div>
+    </div>
     <div class="player--info">
       <div class="info--title">{{ title }}</div>
       <div class="info--artist">{{ artist }}</div>
@@ -42,7 +45,17 @@
         }
       })
 
-      sound.play();
+      sound.play({
+        whileplaying: function() {
+          var scrubber = document.getElementsByClassName('scrubber--mask');
+          scrubber[0].style.width = (this.position/this.durationEstimate)*100 + '%' ;
+
+          console.log((this.position/this.durationEstimate)*100 + '%');
+        }
+      });
+
+      // TODO: ADD ON FINISH METHOD
+
   });
 
   var pause = document.getElementsByClassName('icon-pause');

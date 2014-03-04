@@ -212,7 +212,8 @@ html, body {
 iframe {
   width: 100%;
   height: 60px;
-  background-color: #000; }
+  background-color: #000;
+  margin-top: -2px; }
 
 .player {
   height: 60px;
@@ -220,7 +221,14 @@ iframe {
   background-color: #000; }
   .player .player--scrubber {
     height: 5px;
-    background-color: #FFF; }
+    background-color: #FFF;
+    position: relative; }
+    .player .player--scrubber .scrubber--mask {
+      background: -webkit-linear-gradient(45deg, #902485 0%, #e31837 100%);
+      height: 5px;
+      width: 0;
+      position: absolute;
+      top: 0; }
   .player .player--info {
     height: 25px;
     padding: 13px 15px 0 15px;
