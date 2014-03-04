@@ -85,11 +85,18 @@ window.clientApp.player = {
 
                     that.getTrack(that.trackList[0].id, function(res){
 
-                        that.renderPlayer({
-                            artist: res.data.artist_display_name,
-                            title: res.data.title
-                        });
+                        var core = res;
 
+                        window.clientApp.api.audio(that.trackList[0].id, function(res){
+
+                            that.renderPlayer({
+                                artist: core.data.artist_display_name,
+                                title: core.data.title,
+                                server_url: encodeURIComponent(res.data.location),
+                                url: encodeURIComponent(res.data.resource)
+                            });
+
+                        });
                     });
                 });
 

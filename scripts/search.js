@@ -15,6 +15,8 @@ window.clientApp.search = {
         });
 
         this.$input.keyup(function(e){
+
+            
             that.federatedSearch(that.$input.val());
         });
     },

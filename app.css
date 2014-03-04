@@ -374,8 +374,10 @@ html, body {
     line-height: 32px;
     font-size: 24px;
     font-weight: 500;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-transform: uppercase; }
     .search input::-webkit-input-placeholder {
+      text-transform: uppercase;
       -webkit-transition: color 0.5s ease-in;
       font-size: 24px;
       font-weight: 500;

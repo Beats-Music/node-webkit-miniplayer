@@ -338,8 +338,10 @@ html, body {
         font-size: 24px;
         font-weight: 500;
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        text-transform: uppercase;
 
         &::-webkit-input-placeholder {
+            text-transform: uppercase;
             -webkit-transition: color .5s ease-in;
             font-size: 24px;
             font-weight: 500;

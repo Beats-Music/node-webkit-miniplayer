@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "superagent": "~0.16.0",
-    "express": "~3.4.8"
+    "express": "~3.4.8",
+    "socket.io": "~0.9.16"
   },
   "devDependencies": {
     "grunt-cli": "~0.1.9",
@@ -11,6 +12,9 @@
     "grunt-sass": "~0.11.0",
     "grunt-node-webkit-builder": "~0.1.17",
     "grunt-contrib-copy": "~0.5.0"
+  },
+  "webkit": {
+    "plugin": true
   },
   "main": "index.html",
   "window": {
@@ -22,5 +26,6 @@
     "width": 400,
     "height": 460,
     "resizable": false
-  }
+  },
+  "node-main": "flashPlayer.js"
 }

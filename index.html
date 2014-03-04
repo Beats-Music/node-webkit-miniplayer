@@ -48,27 +48,7 @@
       </script>
 
       <script id="player-template" type="text/x-handlebars-template">
-        <div class="player">
-            <div class="player--scrubber"></div>
-            <div class="player--info">
-              <div class="info--title">{{ title }}</div>
-              <div class="info--artist">{{ artist }}</div>
-            </div>
-
-            <div class="player--action">
-              <div class="action--menu">
-                  <div class="menu--icon"></div>
-                  <div class="menu--icon"></div>
-                  <div class="menu--icon"></div>
-              </div>
-            </div>
-
-            <div class="player--actions">
-              <div class="icon-previous"></div>
-              <div class="icon-pause"></div>
-              <div class="icon-next"></div>
-            </div>
-        </div>
+        <iframe src="http://localhost:3112/player?server_url={{server_url}}&url={{url}}&artist={{artist}}&title={{title}}"></iframe>
       </script>
 
       <script id="search-template" type="text/x-handlebars-template">
