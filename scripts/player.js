@@ -120,11 +120,18 @@ window.clientApp.player = {
 
                     that.getTrack(that.trackList[0].id, function(res){
 
-                        that.renderPlayer({
-                            artist: res.data.artist_display_name,
-                            title: res.data.title
-                        });
+                        var core = res;
 
+                        window.clientApp.api.audio(that.trackList[0].id, function(res){
+
+                            that.renderPlayer({
+                                artist: core.data.artist_display_name,
+                                title: core.data.title,
+                                server_url: encodeURIComponent(res.data.location),
+                                url: encodeURIComponent(res.data.resource)
+                            });
+
+                        });
                     });
                 });
 
@@ -132,21 +139,23 @@ window.clientApp.player = {
 
             case 'track':
                 that.getTrack(ID, function(res){
+
+                    var core = res;
                     that.tracklist = [
                         {
-                            display: res.data.title    
+                            display: core.data.title    
                         }
                     ];
 
                     that.active = {
                         type: 'track',
-                        year: res.data.release_date,
-                        duration: res.data.duration,
-                        owner: res.data.artist_display_name,
-                        title: res.data.title,
+                        year: core.data.release_date,
+                        duration: core.data.duration,
+                        owner: core.data.artist_display_name,
+                        title: core.data.title,
                         id: (function() { 
-                            if(res.data.refs && res.data.refs.artists && res.data.refs.artists[0]){
-                                return res.data.refs.artists[0].id
+                            if(core.data.refs && core.data.refs.artists && core.data.refs.artists[0]){
+                                return core.data.refs.artists[0].id
                             }
                             else {
                                 return '--'
@@ -155,9 +164,15 @@ window.clientApp.player = {
                         image: 'artist'
                     }
 
-                    that.renderPlayer({
-                        artist: res.data.artist_display_name,
-                        title: res.data.title
+                    window.clientApp.api.audio(ID, function(res){
+
+                        that.renderPlayer({
+                            artist: core.data.artist_display_name,
+                            title: core.data.title,
+                            server_url: encodeURIComponent(res.data.location),
+                            url: encodeURIComponent(res.data.resource)
+                        });
+
                     });
                 });
 
@@ -170,7 +185,7 @@ window.clientApp.player = {
         window.clientApp.api.track(ID, cb);
     },
     getAudio: function(){
-
+        
     },
     play: function(){
 

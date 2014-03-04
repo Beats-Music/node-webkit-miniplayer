@@ -14,9 +14,7 @@ window.clientApp.search = {
             that.$input.addClass('colorize');
         });
 
-        this.$input.keyup(function(e){
-
-            
+        this.$input.keyup(function(e){            
             that.federatedSearch(that.$input.val());
         });
     },

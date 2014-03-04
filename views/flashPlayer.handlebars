@@ -16,6 +16,7 @@
     <div class="player--actions">
       <div class="icon-previous"></div>
       <div class="icon-pause"></div>
+      <div class="icon-play"></div>
       <div class="icon-next"></div>
     </div>
 </div>
@@ -43,5 +44,25 @@
 
       sound.play();
   });
+
+  var pause = document.getElementsByClassName('icon-pause');
+  var play = document.getElementsByClassName('icon-play');
+
+  pause[0].onclick = function(){
+      pause[0].style.opacity = 0;
+      play[0].style.opacity = 1;
+
+      sound.pause();
+      return false;
+  };
+
+  play[0].onclick = function(){
+      pause[0].style.opacity = 1;
+      play[0].style.opacity = 0;
+
+      sound.play();
+      return false;
+  };
+
 
 </script>

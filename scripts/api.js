@@ -1,12 +1,12 @@
 window.clientApp.api = {
     baseUrl: config.baseApiUrl,
     beatsAPI: function(url, cb) {
-        var req = request.get(this.baseUrl + url)
+        this.req = request.get(this.baseUrl + url)
         .set('Authorization', 'Bearer ' + window.accessToken)
         .set('Accept', 'application/json')
         .query({client_id: config.clientKey});
 
-        req.end(function(res){
+        this.req.end(function(res){
             if (res.ok) {
                 cb(res.body);
             } 
@@ -18,7 +18,15 @@ window.clientApp.api = {
         console.log(this.baseUrl + url);
     },   
     search: function(query, cb){
-        this.beatsAPI('search/federated?q=' + query, cb);
+        if(!this.searchActive){
+            this.searchActive = true;
+        }
+        else 
+        {
+            this.req.abort();
+        }
+
+        this.beatsAPI('search/federated?q=' + query, cb);       
     },
     audio: function(trackID, cb){
         this.beatsAPI('tracks/' + trackID + '/audio?acquire=1', cb);
