@@ -62,16 +62,16 @@ window.clientApp.player = {
 
         switch(type){
             case 'album':
-                window.clientApp.api.album(ID, function(res){                    
-                    that.trackList = res.data.refs.tracks;
+                window.clientApp.api.album(ID, function(res){
+                    that.trackList = res.data;
 
                     that.active = {
                         type: 'album',
-                        year: res.data.release_date,
-                        numTracks: res.data.total_tracks,
-                        duration: res.data.duration,
-                        owner: res.data.artist_display_name,
-                        title: res.data.title,
+                        year: res.data[0].release_date,
+                        numTracks: res.info.total,
+                        // duration: res.data.duration,
+                        owner: (res.data[0]) ? res.data[0].refs.artist_display_name : '',
+                        title: (res.data[0]) ? res.data[0].refs.album.display : '',
                         id: (function() { 
                             if(res.data.refs && res.data.refs.artists && res.data.refs.artists[0]){
                                 return res.data.refs.artists[0].id
@@ -103,37 +103,41 @@ window.clientApp.player = {
                 break;
 
             case 'playlist':
-                window.clientApp.api.playlist(ID, function(res){
-                    that.trackList = res.data.refs.tracks;
+                window.clientApp.api.playlistTracks(ID, function(res){
 
-                    that.active = {
-                        type: 'playlist',
-                        year: res.data.created_at,
-                        numTracks: res.data.total_tracks,
-                        duration: res.data.duration,
-                        owner: res.data.user_display_name,
-                        title: res.data.name,
-                        subscribers: res.data.total_subscribers,
-                        id: res.data.id,
-                        image: 'playlist'
-                    }
+                    that.trackList = res.data;
 
-                    that.getTrack(that.trackList[0].id, function(res){
+                    window.clientApp.api.playlist(ID, function(res){
 
-                        var core = res;
+                        that.active = {
+                            type: 'playlist',
+                            year: res.data.created_at,
+                            numTracks: res.data.total_tracks,
+                            duration: res.data.duration,
+                            owner: res.data.user_display_name,
+                            title: res.data.name,
+                            subscribers: res.data.total_subscribers,
+                            id: res.data.id,
+                            image: 'playlist'
+                        }
 
-                        window.clientApp.api.audio(that.trackList[0].id, function(res){
+                        that.getTrack(that.trackList[0].id, function(res){
 
-                            that.renderPlayer({
-                                artist: core.data.artist_display_name,
-                                title: core.data.title,
-                                server_url: encodeURIComponent(res.data.location),
-                                url: encodeURIComponent(res.data.resource)
+                            var core = res;
+
+                            window.clientApp.api.audio(that.trackList[0].id, function(res){
+
+                                that.renderPlayer({
+                                    artist: core.data.artist_display_name,
+                                    title: core.data.title,
+                                    server_url: encodeURIComponent(res.data.location),
+                                    url: encodeURIComponent(res.data.resource)
+                                });
+
                             });
-
                         });
                     });
-                });
+                });                
 
                 break;
 

@@ -32,13 +32,16 @@ window.clientApp.api = {
         this.beatsAPI('tracks/' + trackID + '/audio?acquire=1', cb);
     },
     album: function(albumID, cb){
-        this.beatsAPI('albums/' + albumID, cb);
+        this.beatsAPI('albums/' + albumID + '/tracks', cb);
     },
     image: function(type, ID, size, cb){
         return config.mainApi + type + 's/' + ID + '/images/default?size=' + size;
     },
     playlist: function(playlistID, cb){
         this.beatsAPI('playlists/' + playlistID, cb);
+    },
+    playlistTracks: function(playlistID, cb){
+        this.beatsAPI('playlists/' + playlistID + '/tracks', cb);
     },
     track: function(trackID, cb){
         this.beatsAPI('tracks/' + trackID, cb);

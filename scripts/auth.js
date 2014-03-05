@@ -16,8 +16,8 @@ app.get('/cb', function(req,res){
     window.authWin.close();
     window.clientApp.init();
 
-    app.close();
+    server.close();
 
 });
 
-app.listen(3111);
+var server = app.listen(3111);

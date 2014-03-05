@@ -11,6 +11,7 @@
 
 # Compiled binary addons 
 build/Release
+build
 
 # Logs
 logs

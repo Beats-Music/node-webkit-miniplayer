@@ -20,8 +20,8 @@
   "window": {
     "title": "Beats Music",
     "show": true,
-    "toolbar": false,
-    "frame": false,
+    "toolbar": true,
+    "frame": true,
     "position": "center",
     "width": 400,
     "height": 460,
