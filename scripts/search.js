@@ -20,11 +20,10 @@ window.clientApp.search = {
     },
     federatedSearch: function(query){
         var that = this;
+        var results;
 
         window.clientApp.api.search(query, function(res){
-            console.log(res.data);
-
-            var results = Handlebars.compile(window.clientApp.templates.searchResult);
+            results = Handlebars.compile(window.clientApp.templates.searchResult);
             that.$resultsDiv.html(results(res.data));
 
             that.searchResultsPlay();

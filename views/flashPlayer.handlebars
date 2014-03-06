@@ -16,21 +16,24 @@
       <div class="info--artist">{{ artist }}</div>
     </div>
 
-    <!--<div class="player--action">
+    <div class="player--action" style="display: none;">
       <div class="action--menu">
           <div class="menu--icon"></div>
           <div class="menu--icon"></div>
           <div class="menu--icon"></div>
       </div>
-    </div>-->
+    </div>
 
 </div>
 
 <script>
-
-  console.log(parent.window.root.global.window);
-
   var sound;
+  var prev = document.getElementsByClassName('icon-previous');
+  var next = document.getElementsByClassName('icon-next');
+  var pause = document.getElementsByClassName('icon-pause');
+  var play = document.getElementsByClassName('icon-play');
+  var scrubber = document.getElementsByClassName('scrubber--mask');
+  var player = parent.window.root.GLOBAL.window.clientApp.player;
 
   soundManager.setup({
     url: 'soundmanager/swf/',
@@ -39,31 +42,10 @@
   });
 
   soundManager.onready(function(){
-
-    sound = soundManager.createSound({
-      id: 'rtmpPlayer',
-      serverURL: '{{serverURL}}',
-      url: '{{url}}',
-      onconnect: function(bConnect) {
-        // this.connected can also be used
-        // soundManager._writeDebug(this.id+' connected: '+(bConnect?'true':'false'));
-      }
-    })
-
-    sound.play({
-      whileplaying: function() {
-        var scrubber = document.getElementsByClassName('scrubber--mask');
-        scrubber[0].style.width = (this.position/this.durationEstimate)*100 + '%' ;
-      },
-      onfinish: function(){
-        // TODO: Check for next track && wipe out scrubber if next()
-      }
-    });
-
+    playTrack('{{serverURL}}', '{{url}}');
   });
 
-  function playTrack(){
-
+  function playTrack(serverURL, url){
     sound = soundManager.createSound({
       id: 'rtmpPlayer',
       serverURL: serverURL,
@@ -71,34 +53,24 @@
     })
 
     sound.play({
-      whileplaying: function() {
-        var scrubber = document.getElementsByClassName('scrubber--mask');
+      whileplaying: function() {        
         scrubber[0].style.width = (this.position/this.durationEstimate)*100 + '%';
       },
       onfinish: function(){
-        // TODO: Check for next track && wipe out scrubber if next()
+        player.next();
+        scrubber[0].style.width = 0;
       }
     });
   }
 
-  var prev = document.getElementsByClassName('icon-previous');
-  var next = document.getElementsByClassName('icon-next');
-  var pause = document.getElementsByClassName('icon-pause');
-  var play = document.getElementsByClassName('icon-play');
-
   prev[0].onclick = function(){
-
-    console.log("Previous clicked");
-    console.log(socket);
-
+    player.previous();
     return false;
   };
 
   next[0].onclick = function(){
-
-    console.log("NEXT clicked");
+    player.next();
     return false;
-
   };
 
   pause[0].onclick = function(){
@@ -118,6 +90,5 @@
       sound.play();
       return false;
   };
-
 
 </script>

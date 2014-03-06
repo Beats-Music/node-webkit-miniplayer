@@ -3,6 +3,7 @@ window.clientApp.player = {
     init: function(type, ID){
         this.tracklistTmpl = Handlebars.compile(window.clientApp.templates.tracklist);
         this.musicActive = Handlebars.compile(window.clientApp.templates.musicActive);
+        this.container = window.clientApp.$appContainer;
 
         this.render(type, ID);
     },
@@ -13,6 +14,8 @@ window.clientApp.player = {
 
         this.$menu.click(function(){
 
+            //TODO: Preserve player and not destroy
+            // use hiding instead of remove, append
             that.cache = '';
             that.cache = $('.artwork').parent().html() + $('.player').parent().html();
 
@@ -25,17 +28,17 @@ window.clientApp.player = {
             //TODO: Clean up event binding
             window.clientApp.search.backToPlayer();
 
-            window.clientApp.$appContainer.append(
+            that.container.append(
                 that.musicActive({meta: that.active})
             );
 
-            window.clientApp.$appContainer.append(
-                that.tracklistTmpl({ tracks: that.getTracklist() })
+            that.container.append(
+                that.tracklistTmpl({ tracks: that.tracklist })
             );
         });        
     },
     backFromSearch: function(){
-        window.clientApp.$appContainer.html(
+        this.container.html(
             this.cache
         );
 
@@ -46,7 +49,7 @@ window.clientApp.player = {
         this.artwork = Handlebars.compile(window.clientApp.templates.artwork);
         this.player = Handlebars.compile(window.clientApp.templates.player);
 
-        window.clientApp.$appContainer.html(
+        this.container.html(
             this.artwork({type: type, id: ID})
         );
 
@@ -54,17 +57,23 @@ window.clientApp.player = {
         this.backToSearch();
     },
     renderPlayer: function(data){
-        window.clientApp.$appContainer.append(
+        if(this.container.find('iframe')){
+            this.container.find('iframe').remove();
+        }
+
+        this.container.append(
             this.player(data)
         )
     },
     getPlayerContent: function(type, ID){
         var that = this;
+        var api = window.clientApp.api;
 
         switch(type){
             case 'album':
-                window.clientApp.api.album(ID, function(res){
-                    that.trackList = res.data;
+                api.album(ID, function(res){
+                    that.tracklist = res.data;
+                    that.tracklist.position = 0;
 
                     that.active = {
                         type: 'album',
@@ -84,11 +93,11 @@ window.clientApp.player = {
                         image: 'artist'
                     }
 
-                    that.getTrack(that.trackList[0].id, function(res){
+                    api.track(that.tracklist[0].id, function(res){
 
                         var core = res;
 
-                        window.clientApp.api.audio(that.trackList[0].id, function(res){
+                        api.audio(that.tracklist[0].id, function(res){
 
                             that.renderPlayer({
                                 artist: core.data.artist_display_name,
@@ -104,11 +113,11 @@ window.clientApp.player = {
                 break;
 
             case 'playlist':
-                window.clientApp.api.playlistTracks(ID, function(res){
+                api.playlistTracks(ID, function(res){
+                    that.tracklist = res.data;
+                    that.tracklist.position = 0;
 
-                    that.trackList = res.data;
-
-                    window.clientApp.api.playlist(ID, function(res){
+                    api.playlist(ID, function(res){
 
                         that.active = {
                             type: 'playlist',
@@ -122,11 +131,11 @@ window.clientApp.player = {
                             image: 'playlist'
                         }
 
-                        that.getTrack(that.trackList[0].id, function(res){
+                        that.getTrack(that.tracklist[0].id, function(res){
 
                             var core = res;
 
-                            window.clientApp.api.audio(that.trackList[0].id, function(res){
+                            api.audio(that.tracklist[0].id, function(res){
 
                                 that.renderPlayer({
                                     artist: core.data.artist_display_name,
@@ -143,7 +152,7 @@ window.clientApp.player = {
                 break;
 
             case 'track':
-                that.getTrack(ID, function(res){
+                api.track(ID, function(res){
 
                     var core = res;
                     that.tracklist = [
@@ -151,6 +160,7 @@ window.clientApp.player = {
                             display: core.data.title    
                         }
                     ];
+                    that.tracklist.position = 0;
 
                     that.active = {
                         type: 'track',
@@ -169,7 +179,7 @@ window.clientApp.player = {
                         image: 'artist'
                     }
 
-                    window.clientApp.api.audio(ID, function(res){
+                    api.audio(ID, function(res){
 
                         that.renderPlayer({
                             artist: core.data.artist_display_name,
@@ -184,21 +194,42 @@ window.clientApp.player = {
                 break;
 
             default:
+                break;
         }
     },
-    getTrack: function(ID,cb){
-        window.clientApp.api.track(ID, cb);
-    },
-    getAudio: function(){
+    getAudio: function(trackID){
+        var that = this;
 
+        window.clientApp.api.track(trackID, function(res){
+            var core = res;
+
+            window.clientApp.api.audio(trackID, function(res){
+                that.renderPlayer({
+                    artist: core.data.artist_display_name,
+                    title: core.data.title,
+                    server_url: encodeURIComponent(res.data.location),
+                    url: encodeURIComponent(res.data.resource)
+                });
+            });
+        });
+        
     },
     next: function(){
+        if(this.tracklist && this.tracklist.length > 1 && this.tracklist.position < this.tracklist.length){
+            //TODO: Fix going one past
+            
+            this.tracklist.position += 1;
+            this.getAudio(this.tracklist[this.tracklist.position].id);
+        }
 
+        console.log("POSITION:", this.tracklist.position);
     },
     previous: function(){
+        if(this.tracklist && this.tracklist.length > 1 && this.tracklist.position > 0){
+            this.tracklist.position -= 1;
+            this.getAudio(this.tracklist[this.tracklist.position].id);  
+        }
 
-    },
-    getTracklist: function(){
-        return this.trackList;
+        console.log("POSITION:", this.tracklist.position);        
     }
 }

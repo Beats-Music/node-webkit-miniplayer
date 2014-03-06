@@ -203,11 +203,13 @@ html, body {
     margin-top: 20px;
     font-weight: 500; }
 
-.artwork:hover .app--menu--icon--container {
-  opacity: 1; }
-.artwork img {
-  height: 400px;
-  width: 400px; }
+.artwork {
+  height: 400px; }
+  .artwork:hover .app--menu--icon--container {
+    opacity: 1; }
+  .artwork img {
+    height: 400px;
+    width: 400px; }
 
 iframe {
   width: 100%;
@@ -451,4 +453,4 @@ iframe {
       font-size: 13px;
       margin: 16px 0 0 56px; }
       .music--active .music--owner .owner--details .details--type {
-        color
+        color: #999999; }
