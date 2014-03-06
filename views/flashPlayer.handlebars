@@ -27,6 +27,9 @@
 </div>
 
 <script>
+
+  console.log(parent.window.root.global.window);
+
   var sound;
 
   soundManager.setup({
@@ -37,31 +40,66 @@
 
   soundManager.onready(function(){
 
-      sound = soundManager.createSound({
-        id: 'rtmpPlayer',
-        serverURL: '{{serverURL}}',
-        url: '{{url}}',
-        onconnect: function(bConnect) {
-          // this.connected can also be used
-          // soundManager._writeDebug(this.id+' connected: '+(bConnect?'true':'false'));
-        }
-      })
+    sound = soundManager.createSound({
+      id: 'rtmpPlayer',
+      serverURL: '{{serverURL}}',
+      url: '{{url}}',
+      onconnect: function(bConnect) {
+        // this.connected can also be used
+        // soundManager._writeDebug(this.id+' connected: '+(bConnect?'true':'false'));
+      }
+    })
 
-      sound.play({
-        whileplaying: function() {
-          var scrubber = document.getElementsByClassName('scrubber--mask');
-          scrubber[0].style.width = (this.position/this.durationEstimate)*100 + '%' ;
-
-          // console.log((this.position/this.durationEstimate)*100 + '%');
-        }
-      });
-
-      // TODO: ADD ON FINISH METHOD
+    sound.play({
+      whileplaying: function() {
+        var scrubber = document.getElementsByClassName('scrubber--mask');
+        scrubber[0].style.width = (this.position/this.durationEstimate)*100 + '%' ;
+      },
+      onfinish: function(){
+        // TODO: Check for next track && wipe out scrubber if next()
+      }
+    });
 
   });
 
+  function playTrack(){
+
+    sound = soundManager.createSound({
+      id: 'rtmpPlayer',
+      serverURL: serverURL,
+      url: url
+    })
+
+    sound.play({
+      whileplaying: function() {
+        var scrubber = document.getElementsByClassName('scrubber--mask');
+        scrubber[0].style.width = (this.position/this.durationEstimate)*100 + '%';
+      },
+      onfinish: function(){
+        // TODO: Check for next track && wipe out scrubber if next()
+      }
+    });
+  }
+
+  var prev = document.getElementsByClassName('icon-previous');
+  var next = document.getElementsByClassName('icon-next');
   var pause = document.getElementsByClassName('icon-pause');
   var play = document.getElementsByClassName('icon-play');
+
+  prev[0].onclick = function(){
+
+    console.log("Previous clicked");
+    console.log(socket);
+
+    return false;
+  };
+
+  next[0].onclick = function(){
+
+    console.log("NEXT clicked");
+    return false;
+
+  };
 
   pause[0].onclick = function(){
       pause[0].style.opacity = 0;

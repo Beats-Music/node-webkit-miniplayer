@@ -38,6 +38,7 @@ window.clientApp.player = {
         window.clientApp.$appContainer.html(
             this.cache
         );
+
         //TODO: Clean up event binding
         this.backToSearch();
     },

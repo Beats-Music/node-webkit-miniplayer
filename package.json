@@ -1,10 +1,10 @@
 {
   "name": "Beats-Music",
   "version": "0.0.1",
+  "chromium-args": "--disable-web-security",
   "dependencies": {
     "superagent": "~0.16.0",
-    "express": "~3.4.8",
-    "socket.io": "~0.9.16"
+    "express": "~3.4.8"
   },
   "devDependencies": {
     "grunt-cli": "~0.1.9",
@@ -25,7 +25,8 @@
     "position": "center",
     "width": 400,
     "height": 460,
-    "resizable": false
+    "resizable": true
   },
+  "node-remote": "http://localhost:3112",
   "node-main": "flashPlayer.js"
 }

@@ -28,39 +28,3 @@ app.get('/player', function(req,res){
 });
 
 var server = app.listen(3112);
-
-// var io = require('socket.io').listen(server);
-
-// io.sockets.on('connection', function (socket) {
-
-//     socket.emit('connected', {
-//         'connected': 'track'
-//     });
-
-//     socket.on('prevTrack', function (data) {
-//       console.log(data);
-//       //TODO: Add call to API
-//     });
-
-//     socket.on('nextTrack', function (data) {
-//       console.log(data);
-//       //TODO: Add call to API
-//     });
-// });
-
-// <script src="/socket.io/socket.io.js"></script>
-
-// <script>
-//   var socket = io.connect('http://localhost:3112');
-//   socket.on('connect', function (data) {
-//     console.log(data);
-//     // socket.emit();
-//   });
-// </script>
-
-
-
-
-
-
-
