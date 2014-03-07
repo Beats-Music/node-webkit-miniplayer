@@ -9,7 +9,7 @@ Download the latest version of [Flash](http://get.adobe.com/flashplayer/). (Even
 
     $ git clone git@github.com:Beats-Music/node-webkit-miniplayer.git
     
-    $ cd beats-music-desktop
+    $ cd node-webkit-miniplayer
 
     $ npm install 
     
@@ -51,7 +51,7 @@ Until a compile script is written for the JavaScript this is the best way to go.
 
 ### License
 
-#### PUT IN A LICENSE!!!!
+See the LICENSE file for license rights and limitations (BSD-3-Clause).
 
 
 

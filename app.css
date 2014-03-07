@@ -212,7 +212,7 @@ html, body {
     width: 400px; }
 
 iframe {
-  width: 100%;
+  width: 400px;
   height: 60px;
   background-color: #000;
   margin-top: -2px; }

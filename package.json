@@ -4,7 +4,8 @@
   "chromium-args": "--disable-web-security",
   "dependencies": {
     "superagent": "~0.16.0",
-    "express": "~3.4.8"
+    "express": "~3.4.8",
+    "express3-handlebars":"0.5.0"
   },
   "devDependencies": {
     "grunt-cli": "~0.1.9",
