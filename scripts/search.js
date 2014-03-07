@@ -15,6 +15,7 @@ window.clientApp.search = {
 
         this.$resultsDiv = $('.search-results--wrapper');
         this.$input = $('#search-music');
+        this.$form = $('#search-music-form');
 
         this.$input.focus(function(){
             that.$input.addClass('colorize');
@@ -22,6 +23,11 @@ window.clientApp.search = {
 
         this.$input.keyup(function(e){            
             that.federatedSearch(that.$input.val());
+        });
+
+        this.$form.on('submit',function(e){
+          e.preventDefault();
+          e.stopPropagation();
         });
     },
     federatedSearch: function(query){
