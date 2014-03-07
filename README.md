@@ -5,6 +5,8 @@ Experimental desktop app to show the functionality of the Beats Music developer 
 ### How do I run this?
 Head to [developer.beatsmusic.com](http://developer.beatsmusic.com) and apply for a partner key.
 
+Download the latest version of [Flash](http://get.adobe.com/flashplayer/). (Even if you are on a mac. Trust me, I know.)
+
     $ git clone git@github.com:Beats-Music/node-webkit-miniplayer.git
     
     $ cd beats-music-desktop
@@ -42,7 +44,7 @@ Until a compile script is written for the JavaScript this is the best way to go.
 
 ### ** Known Issues
 
-* Flash doesn't load. Potential fixes include [downloading](http://get.adobe.com/flashplayer/) Flash Player for your machine directly or you can try running [nw-trust-flash](https://github.com/szwacz/nw-flash-trust).
+* Flash doesn't load. Try running [nw-trust-flash](https://github.com/szwacz/nw-flash-trust).
 * Going back and forth from search to player kills audio.
 * Tracklist not fully tested.
 * Broken image failovers.
