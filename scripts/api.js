@@ -14,8 +14,6 @@ window.clientApp.api = {
                 console.log('API Error ' + res.text);
             }
         });
-
-        console.log(this.baseUrl + url);
     },   
     search: function(query, cb){
         if(!this.searchActive){
@@ -35,7 +33,7 @@ window.clientApp.api = {
         this.beatsAPI('albums/' + albumID + '/tracks', cb);
     },
     image: function(type, ID, size, cb){
-        return config.mainApi + type + 's/' + ID + '/images/default?size=' + size;
+        return this.baseUrl + type + 's/' + ID + '/images/default?size=' + size + '&client_id=' + config.clientKey;
     },
     playlist: function(playlistID, cb){
         this.beatsAPI('playlists/' + playlistID, cb);

@@ -1,0 +1,6 @@
+module.exports = {
+    "baseUrl": "https://partner.api.beatsmusic.com/",
+    "baseApiUrl": "https://partner.api.beatsmusic.com/v1/api/",
+    "clientKey": "",
+    "clientSecret": ""
+}

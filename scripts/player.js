@@ -131,7 +131,7 @@ window.clientApp.player = {
                             image: 'playlist'
                         }
 
-                        that.getTrack(that.tracklist[0].id, function(res){
+                        api.track(that.tracklist[0].id, function(res){
 
                             var core = res;
 
