@@ -14,6 +14,7 @@
           </div>
       </div>
 
+      <!-- Handlebars Templates -->
       <script id="artwork-template" type="text/x-handlebars-template">
         <div class="artwork">
             <img src={{ getBeatsImage type id "large" }} />
@@ -127,9 +128,8 @@
         </div>
       </script>
 
-
     <script>
-      // Node dependencies
+      // 'Node' dependencies
       var config = require('./config');
       var gui = require('nw.gui');
       var express = require('express');
@@ -139,6 +139,9 @@
       window.clientApp = {};
       window.clientApp.mainWin = gui.Window.get();
     </script>
+
+    <!-- 'Client' dependencies -->
+    <!-- Experimental pattern for using node webkit since using requirejs is not easy here. -->
 
     <script src="components/handlebars/handlebars.min.js"></script>
     <script src="components/jquery/dist/jquery.min.js"></script>
@@ -150,10 +153,5 @@
     <script src="scripts/search.js"></script>
     <script src="scripts/player.js"></script>
     <script src="scripts/appInit.js"></script>
-
-    <script type="text/javascript">
-      // window.clientApp.init();
-    </script>
-
   </body>
 </html>

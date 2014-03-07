@@ -1,3 +1,7 @@
+/**
+ * Handlebars template helpers
+ */
+
 Handlebars.registerHelper("getBeatsImage", function(imageType, assettID, size){
     return window.clientApp.api.image(imageType, assettID, size);
 });

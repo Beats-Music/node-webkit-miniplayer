@@ -1,3 +1,8 @@
+/**
+ * Handlebars templates listed in index.html.
+ * 
+ */
+
 window.clientApp.templates = {
     artwork: $('#artwork-template').html(),
     musicActive: $('#music-active-template').html(),

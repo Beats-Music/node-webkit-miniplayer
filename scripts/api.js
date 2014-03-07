@@ -1,3 +1,10 @@
+/**
+ * Object for requesting the Beats Music Developer API
+ *
+ * Uses superagent to make the HTTP requests.
+ * 
+ */
+
 window.clientApp.api = {
     baseUrl: config.baseApiUrl,
     beatsAPI: function(url, cb) {

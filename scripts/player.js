@@ -1,3 +1,9 @@
+/**
+ * Player object to interact with the iframe player and retrieve content
+ * based on the type of search that has been done.
+ * 
+ */
+
 window.clientApp.player = {
 
     init: function(type, ID){
@@ -18,9 +24,6 @@ window.clientApp.player = {
             // use hiding instead of remove, append
             that.cache = '';
             that.cache = $('.artwork').parent().html() + $('.player').parent().html();
-
-            //TODO: Clean up event binding
-            console.log(that.cache);
 
             window.clientApp.search.player = true;
             window.clientApp.search.init();
@@ -215,21 +218,16 @@ window.clientApp.player = {
         
     },
     next: function(){
-        if(this.tracklist && this.tracklist.length > 1 && this.tracklist.position < this.tracklist.length){
+        if(this.tracklist && this.tracklist.length > 1 && this.tracklist.position < this.tracklist.length){            
             //TODO: Fix going one past
-            
             this.tracklist.position += 1;
             this.getAudio(this.tracklist[this.tracklist.position].id);
         }
-
-        console.log("POSITION:", this.tracklist.position);
     },
     previous: function(){
         if(this.tracklist && this.tracklist.length > 1 && this.tracklist.position > 0){
             this.tracklist.position -= 1;
             this.getAudio(this.tracklist[this.tracklist.position].id);  
-        }
-
-        console.log("POSITION:", this.tracklist.position);        
+        }        
     }
 }

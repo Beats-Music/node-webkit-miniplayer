@@ -1,3 +1,11 @@
+/**
+ * This script runs when node-webkit starts up. It creates an express server
+ * that allow for a flash player to be embedded in an iframe with soundmanager2.
+ *
+ * This is necessary due to the way Flash/RTMP interact with desktop applications.
+ * 
+ */
+
 var express = require('express');
 var app = express();
 var exphbs  = require('express3-handlebars');

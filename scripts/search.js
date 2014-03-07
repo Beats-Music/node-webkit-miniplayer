@@ -1,3 +1,9 @@
+/**
+ *  Simple search object querying the Beats Music API. Also manages the transition
+ *  between the player and search views.
+ * 
+ */
+
 window.clientApp.search = {
 
     init: function(){
