@@ -19,3 +19,6 @@ logs
 
 # Config file with your app values
 config.js
+
+# Node Modules
+node_modules
